@@ -6,7 +6,7 @@ import csv
 agent_id_set = list()
 target_code_name_list = set()
 spy_code_name_list = set()
-
+unit_id_list = list()
 #data-items = 500
 #Spy AGENT
 def generate_agent():
@@ -86,7 +86,7 @@ def generate_spy():
     spy_list = set()
 	for _ in range(500):
 	    spy_code_name = names.get_full_name()
-      spy_code_name_list.add(spy_code_name)
+        spy_code_name_list.add(spy_code_name)
 	    # TODO: specialty NULL for now
 	    specialty = None
 	    target_code_name = random.choice(list(target_code_name_list))
@@ -107,7 +107,16 @@ def generate_home_spy():
         spy_code_name = names.get_full_name()
         current_location = random.choice(country)
         current_location = current_location.rstrip('\n')
-        unit_id = random.randint(10000, 99999)
+        #unit_id
+        if len(unit_id_list) == 0:
+            unit_id = random.randint(10000, 99999)
+        else:
+            unit_id = random.randint(10000, 99999)
+            while unit_id in unit_id_list:
+                unit_id = random.randint(10000, 99999)
+        unit_id_list.append(unit_id)
+
+        #home_spy_id = agent_id
         if len(agent_id_set) == 0:
             home_spy_id = random.choice(agent_id_set) #agent_id is a 5-digit number
         else:
@@ -115,6 +124,7 @@ def generate_home_spy():
             while home_spy_id in home_spy_id_set:
                 home_spy_id = random.choice(agent_id_set) #agent_id is a 5-digit number
         home_spy_id_set.append(home_spy_id)
+
         home_spy_list.append(tuple((spy_code_name, current_location, unit_id, home_spy_id)))
     with open('home_spy_file.csv', 'w+') as csv_file:
         writer = csv.writer(csv_file)
@@ -133,3 +143,5 @@ def generate_alias():
     with open('alias_list_file.csv', 'w+') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerows(alias_list)
+
+#Spy UNIT
