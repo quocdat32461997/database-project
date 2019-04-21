@@ -11,7 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema Spy
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `SPY` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `Spy` DEFAULT CHARACTER SET utf8 ;
 USE `Spy` ;
 
 -- -----------------------------------------------------
@@ -96,7 +96,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Spy`.`HOME SPY`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Spy`.`HOME SPY` (
+CREATE TABLE IF NOT EXISTS `Spy`.`HOME_SPY` (
   `Spy_code_name` VARCHAR(45) NULL,
   `Current_location` VARCHAR(45) NULL,
   `Unit_id` INT NULL,
@@ -140,6 +140,20 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `Spy`.`OTHER`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Spy`.`OTHER` (
+  `Agent_id` INT NOT NULL,
+  `Occupation` VARCHAR(45) NULL,
+  PRIMARY KEY (`Agent_id`),
+  CONSTRAINT `OT_Agent_id`
+    FOREIGN KEY (`Agent_id`)
+    REFERENCES `Spy`.`Agent` (`Agent_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
 -- Table `Spy`.`GADGET`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Spy`.`GADGET` (
@@ -160,7 +174,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Spy`.`FOREIGN SPY ORGANIZATION`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Spy`.`FOREIGN SPY ORGANIZATION` (
+CREATE TABLE IF NOT EXISTS `Spy`.`FOREIGN_SPY_ORGANIZATION` (
   `Org_name` VARCHAR(45) NOT NULL,
   `Origin` VARCHAR(45) NULL,
   `Relationship` VARCHAR(45) NULL,
@@ -171,7 +185,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Spy`.`FOREIGN SPY`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Spy`.`FOREIGN SPY` (
+CREATE TABLE IF NOT EXISTS `Spy`.`FOREIGN_SPY` (
   `Spy_code_name` VARCHAR(45) NOT NULL,
   `Org_name` VARCHAR(45) NULL,
   PRIMARY KEY (`Spy_code_name`),
@@ -183,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `Spy`.`FOREIGN SPY` (
     ON UPDATE NO ACTION,
   CONSTRAINT `FS_Org_name`
     FOREIGN KEY (`Org_name`)
-    REFERENCES `Spy`.`FOREIGN SPY ORGANIZATION` (`Org_name`)
+    REFERENCES `Spy`.`FOREIGN_SPY_ORGANIZATION` (`Org_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -192,7 +206,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Spy`.`COMMON LOCATION`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Spy`.`COMMON LOCATION` (
+CREATE TABLE IF NOT EXISTS `Spy`.`COMMON_LOCATION` (
   `Target_code_name` VARCHAR(45) NOT NULL,
   `Address` VARCHAR(45) NULL,
   PRIMARY KEY (`Target_code_name`),
@@ -207,7 +221,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Spy`.`TARGET SIGHTING`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Spy`.`TARGET SIGHTING` (
+CREATE TABLE IF NOT EXISTS `Spy`.`TARGET_SIGHTING` (
   `Target_code_name` VARCHAR(45) NOT NULL,
   `Date` DATE NULL,
   `Address` VARCHAR(45) NULL,
@@ -223,7 +237,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Spy`.`FOREIGN SPY SIGHTING`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Spy`.`FOREIGN SPY SIGHTING` (
+CREATE TABLE IF NOT EXISTS `Spy`.`FOREIGN_SPY_SIGHTING` (
   `Spy_code_name` VARCHAR(45) NOT NULL,
   `Date` DATE NULL,
   `Address` VARCHAR(45) NULL,
@@ -260,10 +274,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Spy`.`MEANS OF CONTACT`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Spy`.`MEANS OF CONTACT` (
+CREATE TABLE IF NOT EXISTS `Spy`.`MEANS_OF_CONTACT` (
   `Agent_id` INT NOT NULL,
-  `Contact line` INT NULL,
-  `Saettelite_link_address` VARCHAR(45) NULL,
+  `Contact_line` INT NULL,
+  `Sattelite_link_address` VARCHAR(45) NULL,
   `Delivery_point` VARCHAR(45) NULL,
   PRIMARY KEY (`Agent_id`),
   CONSTRAINT `MOC_Agent_id`
