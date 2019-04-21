@@ -5,6 +5,7 @@ import csv
 #global data
 agent_id_set = list()
 target_code_name_list = set()
+spy_code_name_list = set()
 
 #data-items = 500
 #Spy AGENT
@@ -85,6 +86,7 @@ def generate_spy():
     spy_list = set()
 	for _ in range(500):
 	    spy_code_name = names.get_full_name()
+      spy_code_name_list.add(spy_code_name)
 	    # TODO: specialty NULL for now
 	    specialty = None
 	    target_code_name = random.choice(list(target_code_name_list))
@@ -117,3 +119,17 @@ def generate_home_spy():
     with open('home_spy_file.csv', 'w+') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerows(home_spy_list)
+
+#Spy ALIAS
+def generate_alias():
+    alias_list = set()
+    for _ in range(500);
+        spy_code_name = random.choice(list(spy_code_name_list)
+        name = names.get_full_name()
+        # TODO: address and occupation attributes NULL for now
+        address = None
+        occupation = None
+        alias_list.add((spy_code_name, name, address, occupation))
+    with open('alias_list_file.csv', 'w+') as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerows(alias_list)
