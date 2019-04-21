@@ -145,3 +145,21 @@ def generate_alias():
         writer.writerows(alias_list)
 
 #Spy UNIT
+def generate_unit():
+    unit_id_list_2 = list()
+    unit_list = list()
+    for _ in range(500):
+        #unit_id - primary
+        if len(unit_id_list_v2) == 0:
+            unit_id = random.choice(unit_id_list)
+        else:
+            unit_id = random.choice(unit_id_list)
+            while unit_id in unit_id_list_v2:
+                unit_id = random.choie(unit_id_list)
+        unit_id_list_2.append(unit_id)
+        budget = random.randint(1000, 500000)
+        target_code_name = random.choice(list(target_code_name_list))
+        unit_list.append(tuple((unit_id, budget, target_code_name)))
+    with open('unit_file.csv', 'w+') as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerows(unit_list)
