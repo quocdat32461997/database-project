@@ -163,3 +163,18 @@ def generate_unit():
     with open('unit_file.csv', 'w+') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerows(unit_list)
+
+#Spy GADGET
+def generate_gadget():
+    gadget_list = set()
+    for _ in range(500);
+        agent_id = random.choice(list(agent_id_set))
+        service_tag = random.randint(10000, 99999)
+        cost = random.randint(1000, 500000)
+        #TODO: description NULL for now
+        description = None
+        gadget_list.add((agent_id, service_tag, cost, description))
+    with open('gadget_file.csv', 'w+') as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerows(gadget_list)
+
