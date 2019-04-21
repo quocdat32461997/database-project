@@ -62,17 +62,30 @@ with open('firearm_list_file.csv', 'w+') as csv_file:
     writer = csv.writer(csv_file)
     writer.writerows(firearm_list)
 
-def generate_target():
-    target_list = set()
-    for _ in range(500):
-        target_code_name = names.get_full_name()
-        legal_name = names.get_full_name()
-        # TODO: affiliation NULL for now
-        affiliation = None
-        target_list.add((target_code_name, legal_name, affiliation))
-    with open('target_list_file.csv', 'w+') as csv_file:
-        writer = csv.writer(csv_file)
-        writer.writerows(target_list)
+target_list = set()
+target_code_name_list = set()
+for _ in range(500):
+    target_code_name = names.get_full_name()
+    target_code_name_list.add(target_code_name)
+    legal_name = names.get_full_name()
+    # TODO: affiliation NULL for now
+    affiliation = None
+    target_list.add((target_code_name, legal_name, affiliation))
+with open('target_list_file.csv', 'w+') as csv_file:
+    writer = csv.writer(csv_file)
+    writer.writerows(target_list)
 
+spy_list = set()
+for _ in range(500):
+    spy_code_name = names.get_full_name()
+    # TODO: specialty NULL for now
+    specialty = None
+    target_code_name = random.choice(list(target_code_name_list))
+    # TODO: affiliation NULL for now
+    affiliation = None
+    spy_list.add((spy_code_name, specialty, target_code_name, affiliation))
+with open('spy_list_file.csv', 'w+') as csv_file:
+    writer = csv.writer(csv_file)
+    writer.writerows(spy_list)
 
 
