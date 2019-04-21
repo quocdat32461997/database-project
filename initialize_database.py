@@ -1,6 +1,6 @@
 import mysql.connector
 import csv
-mysql = mysql.connector.connect(host="localhost", user = "root", password = "32461997")
+mysql = mysql.connector.connect(host="localhost", user = "root", password = "")
 cursor = mysql.cursor(buffered=True)
 
 #drop database
