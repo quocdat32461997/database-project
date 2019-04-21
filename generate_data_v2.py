@@ -70,32 +70,31 @@ def generate_firearm():
 #Spy TARGET
 def generate_target():
     target_list = set()
-	for _ in range(500):
-	    target_code_name = names.get_full_name()
-	    target_code_name_list.add(target_code_name)
-	    legal_name = names.get_full_name()
+    for _ in range(500):
+        target_code_name = names.get_full_name()
+        target_code_name_list.add(target_code_name)
+        legal_name = names.get_full_name()
 	    # TODO: affiliation NULL for now
-	    affiliation = None
-	    target_list.add((target_code_name, legal_name, affiliation))
-	with open('target_list_file.csv', 'w+') as csv_file:
-	    writer = csv.writer(csv_file)
-	    writer.writerows(target_list)
-
+        affiliation = None
+        target_list.add((target_code_name, legal_name, affiliation))
+    with open('target_list_file.csv', 'w+') as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerows(target_list)
 #Spy SPY
 def generate_spy():
     spy_list = set()
-	for _ in range(500):
-	    spy_code_name = names.get_full_name()
+    for _ in range(500):
+        spy_code_name = names.get_full_name()
         spy_code_name_list.add(spy_code_name)
-	    # TODO: specialty NULL for now
-	    specialty = None
-	    target_code_name = random.choice(list(target_code_name_list))
-	    # TODO: affiliation NULL for now
-	    affiliation = None
-	    spy_list.add((spy_code_name, specialty, target_code_name, affiliation))
-	with open('spy_list_file.csv', 'w+') as csv_file:
-	    writer = csv.writer(csv_file)
-	    writer.writerows(spy_list)
+        #TODO: specialty NULL for now
+        specialty = None
+        target_code_name = random.choice(list(target_code_name_list))
+        #TODO: affiliation NULL for now
+        affiliation = None
+        spy_list.add((spy_code_name, specialty, target_code_name, affiliation))
+    with open('spy_list_file.csv', 'w+') as csv_file:
+        writer = csv.writer(csv_file)
+        write.writerows(spy_list)
 
 #Spy HOME_SPY
 def generate_home_spy():
@@ -133,8 +132,8 @@ def generate_home_spy():
 #Spy ALIAS
 def generate_alias():
     alias_list = set()
-    for _ in range(500);
-        spy_code_name = random.choice(list(spy_code_name_list)
+    for _ in range(500):
+        spy_code_name = random.choice(list(spy_code_name_list))
         name = names.get_full_name()
         # TODO: address and occupation attributes NULL for now
         address = None
@@ -163,3 +162,18 @@ def generate_unit():
     with open('unit_file.csv', 'w+') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerows(unit_list)
+
+#Spy FOREIGN_SPY_ORGANIATION
+def generate_foreign_spy_organization():
+    spy_organization = ['M.I.5', 'C.I.A.', 'K.G.B.', 'F.S.B.','M.S.S.', 'D.G.S.I.', 'N.I.S.', 'Reconnaissance General Bureau']
+    locations = ['United Kingdom', 'U.S.A.', 'Soviet Union', 'Russia', 'Republic of China', 'France', 'South Korea', 'North Korea']
+    relationships = ['FRIENDLY', 'NEUTRAL', 'HOSTILE']
+    spy_organization_list = list()
+    for org in range(5):
+        org_name = spy_organization[org]
+        origin = locations[org]
+        relationship = random.choice(relationships)
+        spy_organization_list.append(tuple((org_name, origin, relationship)))
+    with open('foreign_spy_organization.csv', 'w+') as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerows(spy_organization_list)
