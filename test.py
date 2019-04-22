@@ -1,8 +1,11 @@
 import names
 import random
 import csv
+import mysql
 import generate_data_v2 as gd
 import insert_data as id
+mysql = mysql.connector.connect(host="localhost", user = "root", password = "32461997", database = "Spy")
+cursor = mysql.cursor(buffered=True)
 
 #generate_data
 gd.generate_target()
@@ -41,3 +44,12 @@ id.insert_alias()
 id.insert_other()
 id.insert_means_of_contact()
 print("Data inserted")
+
+mysql.commit()
+
+#testing
+cursor.execute("SELECT * FROM AGENT")
+print('error')
+for x in cursor:
+    print(x)
+cursor.close()
